@@ -36,8 +36,8 @@ jspm_packages
 # Optional REPL history
 .node_repl_history
 
-# vscode
+# customize
 .vscode
-
-# idea
 .idea
+.DS_Store
+dist

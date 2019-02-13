@@ -1,12 +1,21 @@
-/**
- * Created by Galen on 2017/1/28.
- */
-module.exports = (ctx) => ({
-  // parser: ctx.parser ? 'sugarss' : false,
-  // map: ctx.env === 'development' ? ctx.map : false,
-  plugins: {
-    // 'postcss-import': {},
-    'postcss-nested': {},
-    // cssnano: ctx.env === 'production' ? {} : false
-  }
-})
+const postcssPresetEnv = require('postcss-preset-env')
+const cssnano = require('cssnano')
+// const autoprefixer = require('autoprefixer')
+
+module.exports = {
+    plugins: [
+        cssnano({
+            preset: ['default', {
+                // TODO: not clear the mechanism
+                // autoprefixer: true
+            }]
+        }),
+        postcssPresetEnv({
+            stage: 4,
+            features: {
+                // 'nesting-rules': false
+            },
+            // autoprefixer: {} // auto run
+        })
+    ]
+}
