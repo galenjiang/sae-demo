@@ -27,18 +27,18 @@ module.exports = merge.smart(baseConfig, {
                     {
                         loader: 'css-loader',
                         options: {
-                            importLoaders: 2,
+                            importLoaders: 1,
                             url: (url, resourcePath) => {
-                                return url.includes('www.sogou.com');
+                                return url.includes('http://www.xxx.com');
                             },
                         }
                     },
                     {
                         loader: 'postcss-loader',
                     },
-                    {
-                        loader: 'sass-loader'
-                    }
+                    // {
+                    //     loader: 'sass-loader'
+                    // }
                 ]
             }, ]
         }],

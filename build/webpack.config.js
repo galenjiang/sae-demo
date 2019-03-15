@@ -60,18 +60,15 @@ module.exports = {
                         {
                             loader: 'css-loader',
                             options: {
-                                importLoaders: 2,
+                                importLoaders: 1,
                                 url: (url, resourcePath) => {
-                                    return url.includes('www.sogou.com');
+                                    return url.includes('http://www.xxx.com');
                                 },
                             }
                         },
                         {
                             loader: 'postcss-loader',
                         },
-                        {
-                            loader: 'sass-loader'
-                        }
                     ]
                 },
                 {
@@ -91,10 +88,10 @@ module.exports = {
         // minimizer: [
         //     // TODO:
         //     /**
-        //      * While webpack 5 is likely to come with a CSS minimizer built-in, 
-        //      * with webpack 4 you need to bring your own. To minify the output, 
+        //      * While webpack 5 is likely to come with a CSS minimizer built-in,
+        //      * with webpack 4 you need to bring your own. To minify the output,
         //      * use a plugin like optimize-css-assets-webpack-plugin. Setting optimization.
-        //      * minimizer overrides the defaults provided by webpack, 
+        //      * minimizer overrides the defaults provided by webpack,
         //      * so make sure to also specify a JS minimizer:
         //      **/
         //     new UglifyJsPlugin({

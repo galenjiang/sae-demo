@@ -1,11 +1,12 @@
 import './style.css'
 import { map } from 'ramda'
 
-
-console.log(map((text: string) => {
+console.log(
+  map((text: string) => {
     return text.toUpperCase()
-})('app'))
+  })('app'),
+)
 
 import('./test').then(({ test }) => {
-    test()
+  test()
 })

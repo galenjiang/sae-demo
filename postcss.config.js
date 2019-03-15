@@ -13,7 +13,7 @@ module.exports = {
         postcssPresetEnv({
             stage: 4,
             features: {
-                // 'nesting-rules': false
+                'nesting-rules': true
             },
             // autoprefixer: {} // auto run
         })
