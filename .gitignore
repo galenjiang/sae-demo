@@ -40,4 +40,5 @@ jspm_packages
 .vscode
 .idea
 .DS_Store
+dev
 dist
