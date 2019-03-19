@@ -1,6 +1,5 @@
 import { map } from 'ramda'
 
-
 export const test = () => {
   console.log(`hello test`)
 }
