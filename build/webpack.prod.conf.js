@@ -1,4 +1,5 @@
 const path = require('path')
+const webpack = require('webpack')
 const merge = require('webpack-merge')
 const baseConfig = require('./webpack.config')
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
@@ -26,34 +27,19 @@ module.exports = merge(baseConfig, {
       filename: "[name]_[chunkhash:4].css"
     }),
 
-    // new HtmlWebpackPlugin({
-    //   template: 'public/index.ejs',
-    //   templateParameters: {
-    //     'NODE_ENV': process.env.NODE_ENV
-    //   },
-    //
-    //   excludeChunks: ['main']
-    // }),
-    //
-    // new HtmlWebpackPlugin({
-    //   template: 'public/index.ejs',
-    //   templateParameters: {
-    //     'NODE_ENV': process.env.NODE_ENV
-    //   },
-    //   excludeChunks: ['other']
-    // }),
-
     new CleanWebpackPlugin({
       root: path.resolve(__dirname, '..'),
       verbose: true
     }),
 
-    new CleanWebpackPlugin({
-      root: path.resolve(__dirname, '..'),
-      verbose: true
-    }),
     new BundleAnalyzerPlugin({
       openAnalyzer: false
     }),
+
+    // new webpack.DllReferencePlugin({
+    //   // context: path.resolve('..'),
+    //   manifest: require('../dll/manifest.json'),
+    //   // name: 'vendor'
+    // })
   ],
 })

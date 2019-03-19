@@ -1,6 +1,8 @@
 import './containers/app'
 import './style.css'
-import { test } from './components/test1'
+import { test as test1 } from './components/test1'
+
+import { test as test2 } from './components/test2'
 
 import { map } from 'ramda'
 
@@ -10,5 +12,5 @@ console.log(
   })('index'),
 )
 
-console.log('index')
-test()
+test1()
+test2()

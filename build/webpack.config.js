@@ -114,14 +114,24 @@ module.exports = {
     // moduleIds: 'named',
     // chunkIds: 'named'
     splitChunks: {
-      chunks: 'all',
-      minChunks: 2,
-      minSize: 0,
+      chunks: 'all',    // default async
+      minSize: 0,       // default 30000
+      maxSize: 0,
+      minChunks: 1,
+      maxAsyncRequests: 5,
+      maxInitialRequests: 3,
+      automaticNameDelimiter: '~',
+      name: true,
       cacheGroups: {
-        commons: {
+        vendors: {
           test: /[\\/]node_modules[\\/]/,
-          name: 'vendors',
-          chunks: 'all'
+          enforce: true,          // 忽略默认配置
+          priority: -10
+        },
+        default: {
+          minChunks: 2,
+          priority: -20,
+          reuseExistingChunk: true
         }
       }
     },
@@ -144,9 +154,7 @@ module.exports = {
       templateParameters: {
         'NODE_ENV': process.env.NODE_ENV
       },
-
       filename: 'index.html',
-
       excludeChunks: ['other']
     }),
 
@@ -155,11 +163,15 @@ module.exports = {
       templateParameters: {
         'NODE_ENV': process.env.NODE_ENV
       },
-
-
       filename: 'other.html',
       excludeChunks: ['main']
     }),
+
+    new webpack.DllReferencePlugin({
+      // context: path.resolve('..'),
+      manifest: require('../dll/manifest.json'),
+      // name: 'vendor'
+    })
   ],
 
 };

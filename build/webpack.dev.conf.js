@@ -34,10 +34,10 @@ module.exports = merge.smart(baseConfig, {
     new BundleAnalyzerPlugin({
       openAnalyzer: false
     }),
-    new webpack.DllReferencePlugin({
-      // context: path.resolve('..'),
-      manifest: require('../dll/manifest.json'),
-      // name: 'vendor'
-    })
+    // new webpack.DllReferencePlugin({
+    //   // context: path.resolve('..'),
+    //   manifest: require('../dll/manifest.json'),
+    //   // name: 'vendor'
+    // })
   ]
 })
