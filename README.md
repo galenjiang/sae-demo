@@ -5,9 +5,10 @@
 - dev 开发测试服务
 
 ## 命令
-* start
-* build
-* dll
+
+- start
+- build
+- dll
 
 ## 项目特性
 
@@ -19,3 +20,16 @@
 
 - browserslist 设置库的兼容性，由 babel 自动 polyfill
 - ts-config 设置
+
+## 编辑器设置
+
+vscode
+
+```
+"eslint.validate": [
+  "javascript",
+  "javascriptreact",
+  {"language": "typescript", "autoFix": false },
+  {"language": "typescriptreact", "autoFix": false }
+]
+```

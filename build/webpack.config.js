@@ -1,10 +1,9 @@
-const path = require('path');
+const path = require('path')
 const webpack = require('webpack')
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-
 
 // TODO: Is it needed?
 // const DeclarationBundlerPlugin = require('webpack-plugin-typescript-declaration-bundler');
@@ -18,12 +17,12 @@ module.exports = {
   // context: path.resolve(__dirname, '../src'),
   entry: {
     main: './src/index.ts',
-    other: './src/other.ts'
+    other: './src/other.ts',
   },
   output: {
     path: path.resolve('dist'),
     filename: '[name]_[hash:4].js',
-    chunkFilename: 'chunk_[name]_[chunkhash:4].js'
+    chunkFilename: 'chunk_[name]_[chunkhash:4].js',
   },
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.json'],
@@ -40,28 +39,32 @@ module.exports = {
   module: {
     rules: [
       {
+        enforce: 'pre',
+        test: /\.ts$/,
+        exclude: /node_modules/,
+        loader: 'eslint-loader',
+      },
+      {
         oneOf: [
           {
             // Include ts, tsx, js, and jsx files.
             test: /\.(ts|js)x?$/,
             exclude: /node_modules/,
             // loader: 'babel-loader',
-            use: [
-              'babel-loader'
-            ]
+            use: ['babel-loader'],
           },
           {
             test: /\.css/,
-            use: (isDev ?
-                [
+            use: (isDev
+              ? [
                   {
                     loader: 'style-loader',
                   },
-                ] :
-                [
+                ]
+              : [
                   {
                     loader: MiniCssExtractPlugin.loader,
-                    options: {}
+                    options: {},
                   },
                 ]
             ).concat([
@@ -70,27 +73,30 @@ module.exports = {
                 options: {
                   importLoaders: 1,
                   url: (url, resourcePath) => {
-                    return url.includes('http://www.xxx.com');
+                    return url.includes('http://www.xxx.com')
                   },
-                }
+                },
               },
               {
                 loader: 'postcss-loader',
               },
-            ])
+            ]),
           },
           {
             test: /\.(png|jpg|gif)$/i,
             exclude: /node_modules/,
-            use: [{
-              loader: 'url-loader',
-              options: {
-                limit: 8192
-              }
-            }]
-          }
-        ]
-      }],
+            use: [
+              {
+                loader: 'url-loader',
+                options: {
+                  limit: 8192,
+                },
+              },
+            ],
+          },
+        ],
+      },
+    ],
   },
   optimization: {
     // minimizer: [
@@ -114,8 +120,8 @@ module.exports = {
     // moduleIds: 'named',
     // chunkIds: 'named'
     splitChunks: {
-      chunks: 'all',    // default async
-      minSize: 0,       // default 30000
+      chunks: 'all', // default async
+      minSize: 0, // default 30000
       maxSize: 0,
       minChunks: 1,
       maxAsyncRequests: 5,
@@ -125,21 +131,21 @@ module.exports = {
       cacheGroups: {
         vendors: {
           test: /[\\/]node_modules[\\/]/,
-          enforce: true,          // 忽略默认配置
-          priority: -10
+          enforce: true, // 忽略默认配置
+          priority: -10,
         },
         default: {
           minChunks: 2,
           priority: -20,
-          reuseExistingChunk: true
-        }
-      }
+          reuseExistingChunk: true,
+        },
+      },
     },
     // runtimeChunk: true
   },
   plugins: [
     new ForkTsCheckerWebpackPlugin({
-      async: false
+      async: false,
     }),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
@@ -152,26 +158,25 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: 'public/index.ejs',
       templateParameters: {
-        'NODE_ENV': process.env.NODE_ENV
+        NODE_ENV: process.env.NODE_ENV,
       },
       filename: 'index.html',
-      excludeChunks: ['other']
+      excludeChunks: ['other'],
     }),
 
     new HtmlWebpackPlugin({
       template: 'public/index.ejs',
       templateParameters: {
-        'NODE_ENV': process.env.NODE_ENV
+        NODE_ENV: process.env.NODE_ENV,
       },
       filename: 'other.html',
-      excludeChunks: ['main']
+      excludeChunks: ['main'],
     }),
 
     new webpack.DllReferencePlugin({
       // context: path.resolve('..'),
       manifest: require('../dll/manifest.json'),
       // name: 'vendor'
-    })
+    }),
   ],
-
-};
+}
