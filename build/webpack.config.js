@@ -175,8 +175,8 @@ module.exports = {
 
     new webpack.DllReferencePlugin({
       // context: path.resolve('..'),
+      // eslint-disable-next-line
       manifest: require('../dll/manifest.json'),
-      // name: 'vendor'
     }),
   ],
 }
