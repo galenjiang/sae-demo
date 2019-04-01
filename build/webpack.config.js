@@ -21,8 +21,8 @@ module.exports = {
   },
   output: {
     path: path.resolve('dist'),
-    filename: '[name]_[hash:4].js',
-    chunkFilename: 'chunk_[name]_[chunkhash:4].js',
+    filename: 'static/js/[name]_[hash:4].js',
+    chunkFilename: 'static/js/chunk_[name]_[chunkhash:4].js',
   },
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.json'],
@@ -50,7 +50,6 @@ module.exports = {
             // Include ts, tsx, js, and jsx files.
             test: /\.(ts|js)x?$/,
             exclude: /node_modules/,
-            // loader: 'babel-loader',
             use: ['babel-loader'],
           },
           {

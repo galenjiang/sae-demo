@@ -33,3 +33,5 @@ vscode
   {"language": "typescriptreact", "autoFix": false }
 ]
 ```
+
+webstorm 还没有完全适配
